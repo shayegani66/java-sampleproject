@@ -9,6 +9,13 @@ pipeline {
         sh 'mvn clean install'
       }
     }
+    
+    
+    post {
+        always {
+            junit skipPublishingChecks: true, testResults: '**/cpputest_*.xml'
+        }
+    }
     stage ('Deploy') {
       steps {
         script {
